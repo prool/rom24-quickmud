@@ -1,6 +1,13 @@
 QuickMUD is derived from ROM 2.4b6, Merc 2.1 and DikuMUD
 ==============
 
+## TYT BYL PROOL!!!111
+
+This MUDbase is some russificated by Prool.
+Enabled full 8-bit characters, UTF-8, koi8-r and other codepages
+
+Prool, proolix@gmail.com, http://mud.kharkov.org
+
 ## Introduction
 
 QuickMUD / ROM is a "[multi-user dungeon](https://en.wikipedia.org/wiki/MUD)", a text-based MMORPG. ROM is well-known for its fast-paced and exciting combat system. It also happens to be the initial codebase for [Carrion Fields](http://www.carrionfields.net/), the greatest MUD of all time.

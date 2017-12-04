@@ -48,6 +48,16 @@ void substitute_alias (DESCRIPTOR_DATA * d, char *argument)
 
     ch = d->original ? d->original : d->character;
 
+// prool begin
+printf("prooldebug alias arg='%s'\n", argument); // prool
+if (!strcmp(argument,"пруль"))
+	{
+	printf("proolcommand in alias\n");
+        send_to_char ("Прулькоманда #1\r\n", ch);
+	return;
+	}
+// prool end
+
     /* check for prefix */
     if (ch->prefix[0] != '\0' && str_prefix ("prefix", argument))
     {
@@ -64,6 +74,7 @@ void substitute_alias (DESCRIPTOR_DATA * d, char *argument)
         || !str_prefix ("alias", argument) || !str_prefix ("una", argument)
         || !str_prefix ("prefix", argument))
     {
+	printf("prooldebug label 1\n"); // prool
         interpret (d->character, argument);
         return;
     }
@@ -99,6 +110,7 @@ void substitute_alias (DESCRIPTOR_DATA * d, char *argument)
             }
         }
     }
+    printf("prooldebug label 2\n"); // prool
     interpret (d->character, buf);
 }
 

@@ -505,7 +505,16 @@ void interpret (CHAR_DATA * ch, char *argument)
 	&&   !imc_command_hook( ch, command, argument )
 #endif
            )
-            send_to_char ("Huh?\n\r", ch);
+	    {
+	    // unknown command. maybe prool's cyrillic command
+	    printf("command='%s' argument='%s'\n", command, argument); // prooldebug
+	    if (!strcmp(argument,"пруль"))
+		{
+		printf("proolcommand!\n");
+		}
+	    else
+            	send_to_char ("Huh?\n\r", ch);
+	    }
         return;
     }
 
