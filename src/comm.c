@@ -28,6 +28,8 @@
 *    ROM license, in the file Rom24/doc/rom.license                         *
 ****************************************************************************/
 
+//#define PROOLDEBUG
+
 /*
  * This file contains all of the OS-dependent stuff:
  *   startup, signals, BSD sockets for tcp/ip, i/o, timing.
@@ -361,8 +363,6 @@ char *mud_ipaddress = "0.0.0.0";
 int isprool(char c)
 {
 if ((c<32)&&(c>=0)) return 0;
-if (c==-1) return 0;
-if (c==-3) return 0;
 return 1;
 }
 // prool end
@@ -1208,7 +1208,7 @@ void read_from_buffer (DESCRIPTOR_DATA * d)
 {
     int i, j, k;
 
-    // prool:
+#ifdef PROOLDEBUG
     if (d->inbuf[0]) {printf("prool read_from_buffer() inbuf = '%s'\n", d->inbuf); // prool: cyrillic here ok
 
     for (i=0;;i++)
@@ -1218,7 +1218,7 @@ void read_from_buffer (DESCRIPTOR_DATA * d)
 	}
     printf("\n");
     }
-    // end prool
+#endif
 
     /*
      * Hold horses if pending command already.
@@ -1257,7 +1257,8 @@ void read_from_buffer (DESCRIPTOR_DATA * d)
 
         if (d->inbuf[i] == '\b' && k > 0)
             --k;
-        else if ( isprool(d->inbuf[i])/*((d->inbuf[i])>=32) || ((d->inbuf[i])<0)*/ /*isascii (d->inbuf[i]) && isprint (d->inbuf[i])*/) // prool!
+        else if (d->inbuf[i]==-1) {if (((d->inbuf[i+1]==-2)||(d->inbuf[i+1]==-3))&&(d->inbuf[i+2]=1)) i+=2;} // prool:ignore telnet command!
+	else if ( isprool(d->inbuf[i]) /*isascii (d->inbuf[i]) && isprint (d->inbuf[i])*/) // prool
             d->incomm[k++] = d->inbuf[i];
     }
 
@@ -1320,7 +1321,18 @@ void read_from_buffer (DESCRIPTOR_DATA * d)
     while (d->inbuf[i] == '\n' || d->inbuf[i] == '\r')
         i++;
     for (j = 0; (d->inbuf[j] = d->inbuf[i + j]) != '\0'; j++);
-    if (d->incomm[0]) printf("prool read_from_buffer() incomm = '%s'\n", d->incomm); // prool
+
+#ifdef PROOLDEBUG
+    if (d->incomm[0]) {printf("prool read_from_buffer() incomm = '%s'\n", d->incomm);
+    for (i=0;;i++)
+    	{
+		if (d->incomm[i]==0) break;
+		printf(" %02X ", (unsigned char)(d->incomm[i]));
+	}
+    printf("\n");
+    }
+#endif
+
     return;
 }
 

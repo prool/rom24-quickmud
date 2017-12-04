@@ -25,6 +25,8 @@
 *    ROM license, in the file Rom24/doc/rom.license                         *
 ****************************************************************************/
 
+//#define PROOLDEBUG
+
 #if defined(macintosh)
 #include <types.h>
 #else
@@ -506,14 +508,11 @@ void interpret (CHAR_DATA * ch, char *argument)
 #endif
            )
 	    {
-	    // unknown command. maybe prool's cyrillic command
+	    // unknown command
+#ifdef PROOLDEBUG
 	    printf("command='%s' argument='%s'\n", command, argument); // prooldebug
-	    if (!strcmp(argument,"пруль"))
-		{
-		printf("proolcommand!\n");
-		}
-	    else
-            	send_to_char ("Huh?\n\r", ch);
+#endif
+            send_to_char ("Huh?\n\r", ch);
 	    }
         return;
     }

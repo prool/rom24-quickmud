@@ -49,11 +49,12 @@ void substitute_alias (DESCRIPTOR_DATA * d, char *argument)
     ch = d->original ? d->original : d->character;
 
 // prool begin
-printf("prooldebug alias arg='%s'\n", argument); // prool
+// cyrillic or other i14n command place here. prool
+//printf("prooldebug alias arg='%s'\n", argument);
 if (!strcmp(argument,"пруль"))
 	{
-	printf("proolcommand in alias\n");
-        send_to_char ("Прулькоманда #1\r\n", ch);
+	//printf("proolcommand\n");
+        send_to_char ("Cyrillic command #1. -- Прулькоманда #1\r\n", ch);
 	return;
 	}
 // prool end
@@ -74,7 +75,7 @@ if (!strcmp(argument,"пруль"))
         || !str_prefix ("alias", argument) || !str_prefix ("una", argument)
         || !str_prefix ("prefix", argument))
     {
-	printf("prooldebug label 1\n"); // prool
+	//printf("prooldebug label 1\n"); // prool
         interpret (d->character, argument);
         return;
     }
@@ -110,7 +111,7 @@ if (!strcmp(argument,"пруль"))
             }
         }
     }
-    printf("prooldebug label 2\n"); // prool
+    //printf("prooldebug label 2\n"); // prool
     interpret (d->character, buf);
 }
 
