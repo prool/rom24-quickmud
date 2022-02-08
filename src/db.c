@@ -192,7 +192,7 @@ int newobjs = 0;
  * Increase MAX_STRING if you have too.
  * Tune the others only if you understand what you're doing.
  */
-#define            MAX_STRING    1413120
+#define            MAX_STRING    2000000 // 1413120 // prool
 #define            MAX_PERM_BLOCK    131072
 #define            MAX_MEM_LIST    11
 
@@ -2827,7 +2827,7 @@ char *fread_string (FILE * fp)
     plast = top_string + sizeof (char *);
     if (plast > &string_space[MAX_STRING - MAX_STRING_LENGTH])
     {
-        bug ("Fread_string: MAX_STRING %d exceeded.", MAX_STRING);
+        bug ("Error 1: Fread_string: MAX_STRING %d exceeded.", MAX_STRING);
         exit (1);
     }
 
@@ -2939,7 +2939,7 @@ char *fread_string_eol (FILE * fp)
     plast = top_string + sizeof (char *);
     if (plast > &string_space[MAX_STRING - MAX_STRING_LENGTH])
     {
-        bug ("Fread_string: MAX_STRING %d exceeded.", MAX_STRING);
+        bug ("Error 2: Fread_string: MAX_STRING %d exceeded.", MAX_STRING);
         exit (1);
     }
 

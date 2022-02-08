@@ -1,5 +1,12 @@
 #HELPS
 
+0 PROOL~
+Test help from Prool
+
+Test cyrillic text: RU: В чащах юга жил бы цитрус
+UA: Їжаки рулять! Є! Ґ!
+~
+
 0 QMCONFIG~
 Syntax: qmconfig [show|ansiprompt|ansicolor|telnetga] [on|off]
 
